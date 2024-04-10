@@ -8,6 +8,8 @@ var host = new HostBuilder()
     {
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
+        var assembly = AppDomain.CurrentDomain.Load("MobileBackend.Application");
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
     })
     .Build();
 
